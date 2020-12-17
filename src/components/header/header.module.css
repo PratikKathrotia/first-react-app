@@ -1,0 +1,9 @@
+.toggleButton {
+  border: 1px solid black;
+  background-color: rgb(170, 247, 134);
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
