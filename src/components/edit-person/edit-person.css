@@ -1,0 +1,47 @@
+.EditPerson {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.personForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin: 12px 8px;
+}
+
+.field_Label {
+  text-align: left;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.field_Input {
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type='submit'] {
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type='submit']:hover {
+  background-color: #45a049;
+}

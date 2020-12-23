@@ -1,20 +1,22 @@
+import { withRouter } from 'react-router-dom';
 import styles from './person.module.css';
 
 const PersonComponent = (props) => {
   const { personInfo } = props;
   return (
     <div className={styles.Person}>
-      <p>
-        Hi, I'm {personInfo.name} and I am {personInfo.age} years old.
-      </p>
-      <input
-        type="text"
-        placeholder="Enter your name"
-        value={personInfo.name}
-        onChange={(event) => props.nameChange(event, personInfo.id)}
-      />
+      <h4>{personInfo.name}</h4>
+      <p>Hi, I'm {personInfo.age} years old.</p>
+      <div className={styles.footer}>
+        <button className={styles.EditButton} onClick={props.edit}>
+          Edit
+        </button>
+        <button className={styles.DeleteButton} onClick={props.delete}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
 
-export const Person = PersonComponent;
+export const Person = withRouter(PersonComponent);

@@ -1,8 +1,46 @@
 .Person {
-  width: 60%;
-  margin: 20px auto;
-  border: 1px solid #eee;
-  box-shadow: 0 2px 3px #ccc;
-  padding: 16px;
+  width: 30%;
+  margin: 20px;
+  border: 1px solid #bed7f7;
+  box-shadow: 0 2px 3px #b6d1f5;
+  padding: 8px;
   text-align: center;
+  background-color: #d3e3f6;
+}
+
+.Person .footer {
+  display: flex;
+  /* flex-direction: row-reverse; */
+  justify-content: center;
+}
+
+.EditButton {
+  background-color: #afa84c;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 20px;
+}
+
+.EditButton:hover {
+  background-color: #9b9547;
+}
+
+.DeleteButton {
+  background-color: #af4c4c;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.DeleteButton:hover {
+  background-color: #974444;
 }
