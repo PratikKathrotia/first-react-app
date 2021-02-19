@@ -18,7 +18,6 @@ class PersonListComponent extends Component {
   handleNewButtonClick = () => {
     this.props.addPersonInit();
     this.props.history.push('/new-person');
-    console.log('Adding this to check github password/token');
   };
 
   render() {
