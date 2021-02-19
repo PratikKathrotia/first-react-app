@@ -1,59 +1,39 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
+import * as actions from '../../+state/actions';
 import { Person } from '../person/person';
 import './person-list.css';
 
-export class PersonList extends Component {
-  state = {
-    persons: [],
-  };
-
+class PersonListComponent extends Component {
   componentDidMount() {
-    this.loadPersons();
+    this.props.loadPersons();
   }
 
-  loadPersons = () => {
-    axios
-      .get('https://react-demo-b8473-default-rtdb.firebaseio.com/persons.json')
-      .then((response) => {
-        const mappedPersons = Object.keys(response.data).map((key) => ({
-          ...response.data[key],
-          id: key,
-        }));
-        this.setState({ persons: mappedPersons });
-      })
-      .catch((error) => error);
-  };
-
   handlePersonEdit = (id) => {
+    this.props.editPersonInit();
     this.props.history.push(`/persons/${id}`);
   };
 
-  handlePersonDelete = (id) => {
-    axios
-      .delete(
-        `https://react-demo-b8473-default-rtdb.firebaseio.com/persons/${id}.json`
-      )
-      .then((rsp) => this.loadPersons())
-      .catch((err) => console.log(err));
+  handleNewButtonClick = () => {
+    this.props.addPersonInit();
+    this.props.history.push('/new-person');
   };
 
   render() {
     return (
       <div>
-        <Link to="/new-person">
-          <button className="NewButton">Add Person</button>
-        </Link>
+        <button className="NewButton" onClick={this.handleNewButtonClick}>
+          Add Person
+        </button>
         <div className="PersonsContainer">
-          {this.state.persons.map((person) => {
+          {this.props.persons.map((person) => {
             return (
               <Person
                 key={person.id}
                 personInfo={person}
                 edit={() => this.handlePersonEdit(person.id)}
-                delete={() => this.handlePersonDelete(person.id)}
+                delete={() => this.props.deletePerson(person.id)}
               ></Person>
             );
           })}
@@ -62,3 +42,21 @@ export class PersonList extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  persons: state.persons,
+  isPersonsFetching: state.isFetching,
+  personsHasError: state.hasError,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadPersons: () => dispatch(actions.loadPersons()),
+  addPersonInit: () => dispatch({ type: actions.ActionTypes.ADD_PERSON_INIT }),
+  editPersonInit: () => dispatch({ type: actions.ActionTypes.EDIT_PERSON_INIT }),
+  deletePerson: (id) => dispatch(actions.deletePerson(id)),
+});
+
+export const PersonList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PersonListComponent);

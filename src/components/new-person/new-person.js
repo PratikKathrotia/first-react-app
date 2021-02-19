@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
+import * as actions from '../../+state/actions';
 import './new-person.css';
 
-export class NewPerson extends Component {
+class NewPersonComponent extends Component {
   state = {
     person: {
       name: '',
@@ -30,18 +33,14 @@ export class NewPerson extends Component {
     event.preventDefault();
     this.setState({ isSubmitted: true });
     if (this.state.isValid) {
-      axios
-        .post(
-          'https://react-demo-b8473-default-rtdb.firebaseio.com/persons.json',
-          this.state.person
-        )
-        .then((response) => this.props.history.push('/'))
-        .catch((error) => console.log(error));
+      this.props.addPerson(this.state.person);
     }
   };
 
   render() {
-    return (
+    const content = this.props.isCreated ? (
+      <Redirect to="/"></Redirect>
+    ) : (
       <div className="NewPerson">
         <h3>New Person</h3>
         <form className="person_Form">
@@ -74,5 +73,21 @@ export class NewPerson extends Component {
         ) : null}
       </div>
     );
+    return content;
   }
 }
+
+const mapStateToProps = (state) => ({
+  isAdding: state.isAdding,
+  isCreated: state.isCreated,
+  hasError: state.hasError,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addPerson: (person) => dispatch(actions.addPerson(person)),
+});
+
+export const NewPerson = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewPersonComponent);

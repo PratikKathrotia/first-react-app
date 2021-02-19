@@ -1,27 +1,35 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
+import { loadPerson, editPerson } from '../../+state/actions';
 import './edit-person.css';
 
-export class EditPerson extends Component {
+class EditPersonComponent extends Component {
   state = {
-    person: {
-      name: '',
-      age: '',
-    },
+    person: this.props.selectedPerson,
     isValid: false,
     isSubmitted: false,
   };
 
   componentDidMount() {
     const id = this.props.match.params['id'];
-    axios
-      .get(`https://react-demo-b8473-default-rtdb.firebaseio.com/persons/${id}.json`)
-      .then((response) => {
-        this.setState({
-          person: response.data,
-        });
-      })
-      .catch((error) => console.log(error));
+    if (!!id) {
+      this.props.loadPerson(id);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      (!prevProps.selectedPerson && this.props.selectedPerson) ||
+      prevProps.selectedPerson.id !== this.props.selectedPerson.id
+    ) {
+      this.setState({ person: this.props.selectedPerson });
+    }
+  }
+
+  componentWillUnmount() {
+    this.setState(null);
   }
 
   handleInputChange = (event, input) => {
@@ -43,18 +51,14 @@ export class EditPerson extends Component {
     this.setState({ isSubmitted: true });
     if (this.state.isValid) {
       const id = this.props.match.params['id'];
-      axios
-        .put(
-          `https://react-demo-b8473-default-rtdb.firebaseio.com/persons/${id}.json`,
-          this.state.person
-        )
-        .then((response) => this.props.history.push('/'))
-        .catch((error) => console.log(error));
+      this.props.editPerson(id, this.state.person);
     }
   };
 
   render() {
-    return (
+    const content = this.props.isUpdated ? (
+      <Redirect to="/"></Redirect>
+    ) : this.state.person ? (
       <div className="EditPerson">
         <h3>Edit Person</h3>
         <form className="person_Form">
@@ -86,6 +90,22 @@ export class EditPerson extends Component {
           <p>Please fill out all the fields.</p>
         ) : null}
       </div>
-    );
+    ) : null;
+    return content;
   }
 }
+
+const mapStateToProps = (state) => ({
+  selectedPerson: state.selectedPerson,
+  isUpdated: state.isUpdated,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadPerson: (id) => dispatch(loadPerson(id)),
+  editPerson: (id, person) => dispatch(editPerson(id, person)),
+});
+
+export const EditPerson = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditPersonComponent);
