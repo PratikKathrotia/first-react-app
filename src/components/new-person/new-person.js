@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import * as actions from '../../+state/actions';
+import { PersonActions } from '../../+state';
 import './new-person.css';
 
 class NewPersonComponent extends Component {
@@ -78,13 +78,13 @@ class NewPersonComponent extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isAdding: state.isAdding,
-  isCreated: state.isCreated,
-  hasError: state.hasError,
+  isAdding: state.person.isAdding,
+  isCreated: state.person.isCreated,
+  hasError: state.person.hasError,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addPerson: (person) => dispatch(actions.addPerson(person)),
+  addPerson: (person) => dispatch(PersonActions.addPerson(person)),
 });
 
 export const NewPerson = connect(

@@ -1,6 +1,6 @@
-import { ActionTypes } from './actions';
+import { PersonActionTypes } from './person.actions';
 
-const initialState = {
+const initialPersonState = {
   persons: [],
   selectedPerson: null,
   isFetching: false,
@@ -11,16 +11,16 @@ const initialState = {
   hasError: false,
 };
 
-const reducer = (state = initialState, action) => {
+export const PersonReducer = (state = initialPersonState, action) => {
   switch (action.type) {
-    case ActionTypes.LOAD_PERSONS:
+    case PersonActionTypes.LOAD_PERSONS:
       return {
         ...state,
         isFetching: true,
         hasError: false,
       };
 
-    case ActionTypes.LOAD_PERSONS_SUCCESS:
+    case PersonActionTypes.LOAD_PERSONS_SUCCESS:
       return {
         ...state,
         persons: action.persons,
@@ -28,7 +28,7 @@ const reducer = (state = initialState, action) => {
         hasError: false,
       };
 
-    case ActionTypes.LOAD_PERSONS_ERROR:
+    case PersonActionTypes.LOAD_PERSONS_ERROR:
       return {
         ...state,
         persons: [],
@@ -36,14 +36,14 @@ const reducer = (state = initialState, action) => {
         hasError: true,
       };
 
-    case ActionTypes.LOAD_PERSON:
+    case PersonActionTypes.LOAD_PERSON:
       return {
         ...state,
         isFetching: true,
         hasError: false,
       };
 
-    case ActionTypes.LOAD_PERSON_SUCCESS:
+    case PersonActionTypes.LOAD_PERSON_SUCCESS:
       return {
         ...state,
         selectedPerson: action.person,
@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
         hasError: false,
       };
 
-    case ActionTypes.LOAD_PERSON_ERROR:
+    case PersonActionTypes.LOAD_PERSON_ERROR:
       return {
         ...state,
         selectedPerson: null,
@@ -59,14 +59,14 @@ const reducer = (state = initialState, action) => {
         hasError: true,
       };
 
-    case ActionTypes.ADD_PERSON_INIT:
+    case PersonActionTypes.ADD_PERSON_INIT:
       return {
         ...state,
         isAdding: false,
         isCreated: false,
       };
 
-    case ActionTypes.ADD_PERSON:
+    case PersonActionTypes.ADD_PERSON:
       return {
         ...state,
         isAdding: true,
@@ -74,7 +74,7 @@ const reducer = (state = initialState, action) => {
         hasError: false,
       };
 
-    case ActionTypes.ADD_PERSON_SUCCESS:
+    case PersonActionTypes.ADD_PERSON_SUCCESS:
       return {
         ...state,
         isAdding: false,
@@ -82,7 +82,7 @@ const reducer = (state = initialState, action) => {
         hasError: false,
       };
 
-    case ActionTypes.ADD_PERSON_ERROR:
+    case PersonActionTypes.ADD_PERSON_ERROR:
       return {
         ...state,
         isAdding: false,
@@ -90,7 +90,7 @@ const reducer = (state = initialState, action) => {
         hasError: true,
       };
 
-    case ActionTypes.EDIT_PERSON_INIT:
+    case PersonActionTypes.EDIT_PERSON_INIT:
       return {
         ...state,
         isUpdating: true,
@@ -98,14 +98,14 @@ const reducer = (state = initialState, action) => {
         hasError: false,
       };
 
-    case ActionTypes.EDIT_PERSON:
+    case PersonActionTypes.EDIT_PERSON:
       return {
         ...state,
         isFetching: true,
         hasError: false,
       };
 
-    case ActionTypes.EDIT_PERSON_SUCCESS:
+    case PersonActionTypes.EDIT_PERSON_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -114,7 +114,7 @@ const reducer = (state = initialState, action) => {
         hasError: false,
       };
 
-    case ActionTypes.EDIT_PERSON_ERROR:
+    case PersonActionTypes.EDIT_PERSON_ERROR:
       return {
         ...state,
         isFetching: false,
@@ -123,21 +123,21 @@ const reducer = (state = initialState, action) => {
         hasError: true,
       };
 
-    case ActionTypes.DELETE_PERSON:
+    case PersonActionTypes.DELETE_PERSON:
       return {
         ...state,
         isFetching: true,
         hasError: false,
       };
 
-    case ActionTypes.DELETE_PERSON_SUCCESS:
+    case PersonActionTypes.DELETE_PERSON_SUCCESS:
       return {
         ...state,
         isFetching: false,
         hasError: false,
       };
 
-    case ActionTypes.DELETE_PERSON_ERROR:
+    case PersonActionTypes.DELETE_PERSON_ERROR:
       return {
         ...state,
         isFetching: false,
@@ -148,5 +148,3 @@ const reducer = (state = initialState, action) => {
       return { ...state };
   }
 };
-
-export default reducer;

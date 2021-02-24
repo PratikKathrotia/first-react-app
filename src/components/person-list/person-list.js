@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '../../+state/actions';
+import { PersonActionTypes, PersonActions } from '../../+state';
 import { Person } from '../person/person';
 import './person-list.css';
 
@@ -44,16 +44,16 @@ class PersonListComponent extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  persons: state.persons,
-  isPersonsFetching: state.isFetching,
-  personsHasError: state.hasError,
+  persons: state.person.persons,
+  isPersonsFetching: state.person.isFetching,
+  personsHasError: state.person.hasError,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadPersons: () => dispatch(actions.loadPersons()),
-  addPersonInit: () => dispatch({ type: actions.ActionTypes.ADD_PERSON_INIT }),
-  editPersonInit: () => dispatch({ type: actions.ActionTypes.EDIT_PERSON_INIT }),
-  deletePerson: (id) => dispatch(actions.deletePerson(id)),
+  loadPersons: () => dispatch(PersonActions.loadPersons()),
+  addPersonInit: () => dispatch({ type: PersonActionTypes.ADD_PERSON_INIT }),
+  editPersonInit: () => dispatch({ type: PersonActionTypes.EDIT_PERSON_INIT }),
+  deletePerson: (id) => dispatch(PersonActions.deletePerson(id)),
 });
 
 export const PersonList = connect(

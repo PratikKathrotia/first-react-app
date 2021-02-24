@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { loadPerson, editPerson } from '../../+state/actions';
+import { PersonActions } from '../../+state';
 import './edit-person.css';
 
 class EditPersonComponent extends Component {
@@ -96,13 +96,13 @@ class EditPersonComponent extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  selectedPerson: state.selectedPerson,
-  isUpdated: state.isUpdated,
+  selectedPerson: state.person.selectedPerson,
+  isUpdated: state.person.isUpdated,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadPerson: (id) => dispatch(loadPerson(id)),
-  editPerson: (id, person) => dispatch(editPerson(id, person)),
+  loadPerson: (id) => dispatch(PersonActions.loadPerson(id)),
+  editPerson: (id, person) => dispatch(PersonActions.editPerson(id, person)),
 });
 
 export const EditPerson = connect(

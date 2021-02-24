@@ -14,14 +14,8 @@ const HeaderComponent = (props) => {
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to={{
-                  pathname: '/test',
-                  hash: '#submit',
-                  search: '?quick-search=true',
-                }}
-              >
-                Test
+              <NavLink to="/auth" exact activeClassName="active_link">
+                Authenticate
               </NavLink>
             </li>
           </ul>

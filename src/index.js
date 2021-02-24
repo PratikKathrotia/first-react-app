@@ -1,15 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import './index.css';
 import { App } from './App';
-import reducer from './+state/reducer';
+import { AuthReducer, PersonReducer } from './+state';
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(
+  combineReducers({
+    auth: AuthReducer,
+    person: PersonReducer,
+  }),
+  applyMiddleware(thunk)
+);
 
 ReactDOM.render(
   <React.StrictMode>
