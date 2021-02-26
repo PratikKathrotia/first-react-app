@@ -145,6 +145,6 @@ export const PersonReducer = (state = initialPersonState, action) => {
       };
 
     default:
-      return { ...state };
+      return state;
   }
 };

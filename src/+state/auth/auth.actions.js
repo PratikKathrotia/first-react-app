@@ -26,6 +26,8 @@ export const AuthActions = {
         })
         .then((response) => {
           console.log(response.data);
+          ApiAuthService.setAuthToken(response.data.idToken);
+          ApiAuthService.setRefreshToken(response.data.refreshToken);
           dispatch({
             type: AuthActionTypes.SIGNUP_USER_SUCCESS,
             payload: {
@@ -35,8 +37,8 @@ export const AuthActions = {
           });
         })
         .catch((error) => {
-          console.log(error);
-          dispatch({ type: AuthActionTypes.SIGNUP_USER_ERROR, payload: error });
+          const msg = error.response.data.error.message;
+          dispatch({ type: AuthActionTypes.SIGNUP_USER_ERROR, payload: msg });
         });
     };
   },
@@ -55,6 +57,8 @@ export const AuthActions = {
         })
         .then((response) => {
           console.log(response.data);
+          ApiAuthService.setAuthToken(response.data.idToken);
+          ApiAuthService.setRefreshToken(response.data.refreshToken);
           dispatch({
             type: AuthActionTypes.AUTHENTICATE_USER_SUCCESS,
             payload: {
@@ -64,10 +68,10 @@ export const AuthActions = {
           });
         })
         .catch((error) => {
-          console.log(error);
+          const msg = error.response.data.error.message;
           dispatch({
             type: AuthActionTypes.AUTHENTICATE_USER_ERROR,
-            payload: error,
+            payload: msg,
           });
         });
     };
