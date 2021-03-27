@@ -15,14 +15,6 @@
 }
 
 .EditButton {
-  background-color: #afa84c;
-  border: none;
-  color: white;
-  padding: 8px 16px;
-  text-align: center;
-  display: inline-block;
-  cursor: pointer;
-  border-radius: 4px;
   margin-right: 20px;
 }
 

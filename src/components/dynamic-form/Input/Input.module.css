@@ -1,0 +1,40 @@
+.Input_Container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: auto;
+  width: 40%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.Input {
+  width: 100%;
+  outline: none;
+  border: 1px solid #ccc;
+  background-color: white;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.invalid {
+  border: 1px solid red;
+}
+
+.Error {
+  margin-top: 4px;
+  font-size: 11px;
+  color: red;
+  font-style: italic;
+}
+
+.Input:focus {
+  outline: none;
+  border: 1px solid rgb(27, 39, 146);
+}
+
+.Lable {
+  font-weight: bold;
+  margin-bottom: 8px;
+}

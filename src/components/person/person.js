@@ -1,4 +1,5 @@
 import { withRouter } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 import styles from './person.module.css';
 
 const PersonComponent = (props) => {
@@ -8,12 +9,22 @@ const PersonComponent = (props) => {
       <h4>{personInfo.name}</h4>
       <p>Hi, I'm {personInfo.age} years old.</p>
       <div className={styles.footer}>
-        <button className={styles.EditButton} onClick={props.edit}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={styles.EditButton}
+          onClick={props.edit}
+        >
           Edit
-        </button>
-        <button className={styles.DeleteButton} onClick={props.delete}>
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          className={styles.DeleteButton}
+          onClick={props.delete}
+        >
           Delete
-        </button>
+        </Button>
       </div>
     </div>
   );

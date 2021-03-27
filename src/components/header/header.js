@@ -14,6 +14,20 @@ const HeaderComponent = (props) => {
               </NavLink>
             </li>
             <li>
+              <NavLink to="/layout" exact activeClassName="active_link">
+                Layout
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dynamic-form-example"
+                exact
+                activeClassName="active_link"
+              >
+                Dynamic form
+              </NavLink>
+            </li>
+            <li>
               <NavLink to="/auth" exact activeClassName="active_link">
                 Authenticate
               </NavLink>
